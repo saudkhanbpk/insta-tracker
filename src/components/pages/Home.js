@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../Layout'
 import { InstagramLogin } from "@amraneze/react-instagram-login";
 import instagram from './../../assets/1658587303instagram-png.png'
+import axios from 'axios';
 function Home() {
+  const [userProfile, setUserProfile] = useState(null);
 
   const responseInstagram = (response) => {
-    console.warn(response);
+    if (response) {
+      getUserProfileData(response);
+    }
+    console.log("res in home", response);
   };
 
 
+  console.log("userProfile", userProfile);
+
   const clientId = "827238338930101";
   const redirectUrl = "https://insta-tracker.onrender.com/";
+
+  const getUserProfileData = (accessToken) => {
+    axios.get(`https://graph.instagram.com/me?fields=id,username,account_type&access_token=${accessToken}`)
+      .then(response => {
+        console.log(response.data);
+        setUserProfile(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+        setUserProfile(null);
+      });
+  };
+
   return (
     <Layout>
       <div className="d-flex flex-column justify-content-center align-items-center mt-5">
