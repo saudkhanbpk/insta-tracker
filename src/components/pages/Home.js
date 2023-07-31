@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../Layout'
 import { InstagramLogin } from "@amraneze/react-instagram-login";
 import instagram from './../../assets/1658587303instagram-png.png'
@@ -8,18 +8,19 @@ function Home() {
 
   const responseInstagram = (response) => {
     if (response) {
-      getUserProfileData(response);
+      // getUserProfileData(response);
     }
     console.log("res in home", response);
   };
 
+  let accessToken = "AQDqxPW41atRWgYeNUnwNin8aOs5Rm2tkwjlwJkx8Snyys3nv-uTjsZufEzXctqyDF9jdrmtv1i4YkA-qJ-4yKcoHSzyOZ-gpBQb0n-i8IDXZ5IeD0BXzweE8N2Dup2wQ-vnbKgmFT2DK9RKe1vvLAszFixefjc8yOMcVo4rSF2mdetnm0XBud6h_g2WVWgqVipLaaKBj9BNN7dlb84d95BkPgOylnpPkh9EcLONsPY1nQ"
 
-  console.log("userProfile", userProfile);
+  // console.log("userProfile", userProfile);
 
-  const clientId = "827238338930101";
+  const clientId = "797315068796639";
   const redirectUrl = "https://insta-tracker.onrender.com/";
 
-  const getUserProfileData = (accessToken) => {
+  const getUserProfileData = () => {
     axios.get(`https://graph.instagram.com/me?fields=id,username,account_type&access_token=${accessToken}`)
       .then(response => {
         console.log(response.data);
@@ -30,6 +31,10 @@ function Home() {
         setUserProfile(null);
       });
   };
+
+  useEffect(() => {
+    getUserProfileData();
+  }, [])
 
   return (
     <Layout>
@@ -46,7 +51,7 @@ function Home() {
           onSuccess={responseInstagram}
           onFailure={responseInstagram}
           redirectUri={redirectUrl}
-          scope="user_profile,user_media,publish_video,pages_show_list,instagram_basic,instagram_content_publish,pages_read_engagement"
+          scope="user_profile"
           useRedirect={false}
         >
           <i className="fab fa-instagram fa-lg"></i>
