@@ -10,7 +10,7 @@ function Home() {
 
 
   const clientId = "827238338930101";
-  const redirectUrl = "https://imrankhan44-portfolio.netlify.app/";
+  const redirectUrl = "https://insta-tracker.onrender.com/";
   return (
     <Layout>
       <div className="d-flex flex-column justify-content-center align-items-center mt-5">
