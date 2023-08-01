@@ -5,7 +5,7 @@ import axios from 'axios';
 import PostsAndStories from './PostsAndStories';
 function Home() {
   const [userProfile, setUserProfile] = useState(null);
-
+  const [userToken, setUserToken] = useState(null)
   const responseInstagram = (response) => {
     if (response) {
       localStorage.setItem("accessToken", response);
@@ -37,10 +37,17 @@ function Home() {
     getUserProfileData();
   }, [])
 
+  useEffect(() => {
+    let user = localStorage.getItem("accessToken");
+    if (user) {
+      setUserToken(user)
+    }
+  }, [])
+  console.log("userToken", userToken);
   return (
     <>
       {
-        localStorage.getItem("accessToken") ? (
+        userToken ? (
           <PostsAndStories />
 
         ) : (
