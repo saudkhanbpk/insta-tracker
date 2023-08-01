@@ -9,6 +9,7 @@ function Home() {
   const responseInstagram = (response) => {
     if (response) {
       localStorage.setItem("accessToken", response);
+      setUserToken(response);
       // getUserProfileData(response);
     }
     console.log("res in home", response);
@@ -40,9 +41,9 @@ function Home() {
   useEffect(() => {
     let user = localStorage.getItem("accessToken");
     if (user) {
-      setUserToken(user)
+      setUserToken(user);
     }
-  }, [])
+  }, []);
   console.log("userToken", userToken);
   return (
     <>
