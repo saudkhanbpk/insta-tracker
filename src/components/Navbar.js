@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -17,11 +18,11 @@ function Header() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="#action1">Campaigns</Nav.Link>
-              <Nav.Link href="#action2">Influencers</Nav.Link>
-              <Nav.Link href="#">Influential Fans</Nav.Link>
-              <Nav.Link href="#">Assets</Nav.Link>
-              <Nav.Link href="#">Free tools</Nav.Link>
+              <Link to="/" className='menu_link'>Campaigns</Link>
+              <Link to="/" className='menu_link'>Influencers</Link>
+              <Link to="/" className='menu_link'>Influential Fans</Link>
+              <Link to="/" className='menu_link'>Assets</Link>
+              <Link to="/" className='menu_link'>Free tools</Link>
             </Nav>
             <Form className="d-flex">
               <div className="credits__button mx-3">Credits remaining: 100</div>
