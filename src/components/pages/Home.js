@@ -32,10 +32,10 @@ function Home() {
       const data = await response.json();
       console.log(data)
       // Extract the access token from the response
-      const accessToken = data.access_token;
-      setAccessToken(accessToken)
+      const token = data.access_token;
+      setAccessToken(token)
       // Now you can use the access token to make authorized API calls
-      console.log('Access Token:', accessToken);
+      console.log('Access Token:', token);
     } catch (error) {
       console.error('Error exchanging code for token:', error);
     }
