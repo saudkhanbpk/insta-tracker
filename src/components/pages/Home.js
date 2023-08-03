@@ -9,9 +9,9 @@ function Home() {
   const [accessToken, setAccessToken] = useState(null)
 
   let accessToken1 = "IGQVJXZAWtoZAWE0ejJodDE5RXUyWXMwd0c3eWpUeDZA0UXRSVk9nelh0MmxyVDYxRHNUcS14Rklmck5meWFIaHBlb2hPS3ZAUelVSMy1wUFh1b3FqLU1QbFZAoQjJva2ZAtWWlXS2l3WHZAoNlVzcDNIZAWU2MgZDZD"
-  const clientId = "1039996780495432";
+  const clientId = "797315068796639";
   const redirectUrl = "https://insta-tracker.onrender.com/";
-  const clientSecret = "0cf2bfbf334c6a09df3f27447bad0db0";
+  const clientSecret = "66eb181eb7668deae16feb1fa41d342b";
 
   const exchangeCodeForToken = async (code) => {
     try {
