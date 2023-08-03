@@ -5,27 +5,52 @@ import axios from 'axios';
 import PostsAndStories from './PostsAndStories';
 function Home() {
   const [userProfile, setUserProfile] = useState(null);
-  const [userToken, setUserToken] = useState(null)
+  const [userToken, setUserToken] = useState(null);
+  const [accessToken, setAccessToken] = useState(null)
+
+  let accessToken1 = "IGQVJXZAWtoZAWE0ejJodDE5RXUyWXMwd0c3eWpUeDZA0UXRSVk9nelh0MmxyVDYxRHNUcS14Rklmck5meWFIaHBlb2hPS3ZAUelVSMy1wUFh1b3FqLU1QbFZAoQjJva2ZAtWWlXS2l3WHZAoNlVzcDNIZAWU2MgZDZD"
+  const clientId = "1039996780495432";
+  const redirectUrl = "https://insta-tracker.onrender.com/";
+  const clientSecret = "0cf2bfbf334c6a09df3f27447bad0db0";
+
+  const exchangeCodeForToken = async (code) => {
+    try {
+      const response = await fetch('https://api.instagram.com/oauth/access_token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          client_id: clientId,
+          client_secret: clientSecret,
+          grant_type: 'authorization_code',
+          redirect_uri: redirectUrl,
+          code: code,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data)
+      // Extract the access token from the response
+      const accessToken = data.access_token;
+      setAccessToken(accessToken)
+      // Now you can use the access token to make authorized API calls
+      console.log('Access Token:', accessToken);
+    } catch (error) {
+      console.error('Error exchanging code for token:', error);
+    }
+  };
   const responseInstagram = (response) => {
     if (response) {
+      exchangeCodeForToken(response)      // getUserProfileData(response);
       localStorage.setItem("accessToken", response);
-      setUserToken(response);
-      // getUserProfileData(response);
     }
     console.log("res in home", response);
   };
 
-  let accessToken = "AQDqxPW41atRWgYeNUnwNin8aOs5Rm2tkwjlwJkx8Snyys3nv-uTjsZufEzXctqyDF9jdrmtv1i4YkA-qJ-4yKcoHSzyOZ-gpBQb0n-i8IDXZ5IeD0BXzweE8N2Dup2wQ-vnbKgmFT2DK9RKe1vvLAszFixefjc8yOMcVo4rSF2mdetnm0XBud6h_g2WVWgqVipLaaKBj9BNN7dlb84d95BkPgOylnpPkh9EcLONsPY1nQ"
-
-  // console.log("userProfile", userProfile);
-
-  const clientId = "1039996780495432";
-  const redirectUrl = "https://insta-tracker.onrender.com/";
-
   const getUserProfileData = () => {
     axios.get(`https://graph.instagram.com/me?fields=id,username,account_type&access_token=${accessToken}`)
       .then(response => {
-        console.log(response.data);
         setUserProfile(response.data);
       })
       .catch(error => {
@@ -34,8 +59,23 @@ function Home() {
       });
   };
 
+  // const getUserMedia = () => {
+  //   axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=${accessToken}`)
+  //     .then(response => {
+  //       console.log(response.data);
+  //       // setUserProfile(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //       // setUserProfile(null);
+  //     });
+  // }
+
+
+
   useEffect(() => {
     getUserProfileData();
+    // getUserMedia();
   }, [])
 
   useEffect(() => {
@@ -44,12 +84,13 @@ function Home() {
       setUserToken(user);
     }
   }, []);
-  console.log("userToken", userToken);
+
+
   return (
     <>
       {
         userToken ? (
-          <PostsAndStories />
+          <PostsAndStories userProfile={userProfile} />
 
         ) : (
           <>

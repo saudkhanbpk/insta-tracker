@@ -3,13 +3,13 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
-function PostsAndStories() {
+function PostsAndStories({ userProfile }) {
   return (
     <>
       <Navbar className="" style={{ borderBottom: "solid black 1px" }}>
         <Container fluid>
           <Navbar.Text>
-            <span className='loggedInUser'>Connected: Imrookhan</span>
+            <span className='loggedInUser'>Connected: {userProfile?.username}</span>
           </Navbar.Text>          <Navbar.Toggle />
           <Link to="/posts-and-stories" className='menu_links'>Story Mentions</Link>
           <Link to="posts" className='menu_links'>Posts Mentions</Link>
