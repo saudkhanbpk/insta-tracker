@@ -33,7 +33,9 @@ function Home() {
       console.log(data)
       // Extract the access token from the response
       const token = data.access_token;
-      setAccessToken(token)
+      if (token) {
+        localStorage.setItem("igToken", token);
+      }
       // Now you can use the access token to make authorized API calls
       console.log('Access Token:', token);
     } catch (error) {
@@ -49,9 +51,10 @@ function Home() {
   };
 
   console.log("accessToken", accessToken)
-
+  const igToken = localStorage.getItem("igToken");
+  console.log("igToken", igToken)
   const getUserProfileData = () => {
-    axios.get(`https://graph.instagram.com/me?fields=id,username&access_token=${accessToken}`)
+    axios.get(`https://graph.instagram.com/me?fields=id,username&access_token=${igToken}`)
       .then(response => {
         setUserProfile(response.data);
       })
