@@ -6,7 +6,7 @@ import PostsAndStories from './PostsAndStories';
 function Home() {
   const [userProfile, setUserProfile] = useState(null);
   const [userToken, setUserToken] = useState(null);
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken] = useState("")
 
   let accessToken1 = "IGQVJXZAWtoZAWE0ejJodDE5RXUyWXMwd0c3eWpUeDZA0UXRSVk9nelh0MmxyVDYxRHNUcS14Rklmck5meWFIaHBlb2hPS3ZAUelVSMy1wUFh1b3FqLU1QbFZAoQjJva2ZAtWWlXS2l3WHZAoNlVzcDNIZAWU2MgZDZD"
   const clientId = "797315068796639";
@@ -48,8 +48,10 @@ function Home() {
     console.log("res in home", response);
   };
 
+  console.log("accessToken", accessToken)
+
   const getUserProfileData = () => {
-    axios.get(`https://graph.instagram.com/me?fields=id,username,account_type&access_token=${accessToken}`)
+    axios.get(`https://graph.instagram.com/me?fields=id,username&access_token=${accessToken}`)
       .then(response => {
         setUserProfile(response.data);
       })
