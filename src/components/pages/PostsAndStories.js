@@ -18,7 +18,7 @@ function PostsAndStories({ userProfile }) {
           <Link to="/posts-and-stories" className='menu_links'>Story Mentions</Link>
           <Link to="posts" className='menu_links'>Posts Mentions</Link>
           <Navbar.Collapse className="justify-content-end">
-            <button className='button__disconnect' onClick={handleLogout()}>Disconnect</button>
+            <button className='button__disconnect' onClick={handleLogout}>Disconnect</button>
           </Navbar.Collapse>
         </Container>
       </Navbar>
