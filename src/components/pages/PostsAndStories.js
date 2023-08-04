@@ -4,6 +4,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
 function PostsAndStories({ userProfile }) {
+  const handleLogout = () => {
+    localStorage.clear();
+
+  }
   return (
     <>
       <Navbar className="" style={{ borderBottom: "solid black 1px" }}>
@@ -14,7 +18,7 @@ function PostsAndStories({ userProfile }) {
           <Link to="/posts-and-stories" className='menu_links'>Story Mentions</Link>
           <Link to="posts" className='menu_links'>Posts Mentions</Link>
           <Navbar.Collapse className="justify-content-end">
-            <button className='button__disconnect'>Disconnect</button>
+            <button className='button__disconnect' onClick={handleLogout()}>Disconnect</button>
           </Navbar.Collapse>
         </Container>
       </Navbar>

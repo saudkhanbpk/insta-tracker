@@ -8,7 +8,6 @@ function Home() {
   const [userToken, setUserToken] = useState(null);
   const [accessToken, setAccessToken] = useState("")
 
-  let accessToken1 = "IGQVJXZAWtoZAWE0ejJodDE5RXUyWXMwd0c3eWpUeDZA0UXRSVk9nelh0MmxyVDYxRHNUcS14Rklmck5meWFIaHBlb2hPS3ZAUelVSMy1wUFh1b3FqLU1QbFZAoQjJva2ZAtWWlXS2l3WHZAoNlVzcDNIZAWU2MgZDZD"
   const clientId = "797315068796639";
   const redirectUrl = "https://insta-tracker.onrender.com/";
   const clientSecret = "66eb181eb7668deae16feb1fa41d342b";
@@ -31,12 +30,10 @@ function Home() {
 
       const data = await response.json();
       console.log(data)
-      // Extract the access token from the response
       const token = data.access_token;
       if (token) {
         localStorage.setItem("igToken", token);
       }
-      // Now you can use the access token to make authorized API calls
       console.log('Access Token:', token);
     } catch (error) {
       console.error('Error exchanging code for token:', error);
@@ -64,23 +61,23 @@ function Home() {
       });
   };
 
-  // const getUserMedia = () => {
-  //   axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=${accessToken}`)
-  //     .then(response => {
-  //       console.log(response.data);
-  //       // setUserProfile(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //       // setUserProfile(null);
-  //     });
-  // }
+  const getUserMedia = () => {
+    axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=${igToken}`)
+      .then(response => {
+        console.log("media", response.data.data);
+        // setUserProfile(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+        // setUserProfile(null);
+      });
+  }
 
 
-
+  console.log("userProfile", userProfile)
   useEffect(() => {
     getUserProfileData();
-    // getUserMedia();
+    getUserMedia();
   }, [])
 
   useEffect(() => {
