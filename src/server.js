@@ -12,9 +12,9 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Handle incoming webhook requests
 app.get('/webhook', (req, res) => {
-  const { verify_token } = req.body  // Process the webhook data here
-  console.log('Webhook data:', verify_token);
-  res.sendStatus(200);
+  console.log('Received request:', req.query); // Log the query parameters
+  const challenge = req.query['hub.challenge'];
+  res.status(200).send(challenge);
 });
 
 // Serve the React app
