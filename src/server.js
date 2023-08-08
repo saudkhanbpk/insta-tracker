@@ -12,9 +12,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Handle incoming webhook requests
 app.post('/webhook', (req, res) => {
-  const eventData = req.body;
-  // Process the webhook data here
-  console.log('Webhook data:', eventData);
+  const { verify_token } = req.body  // Process the webhook data here
+  console.log('Webhook data:', verify_token);
   res.sendStatus(200);
 });
 
