@@ -7,6 +7,7 @@ function Home() {
   const [userProfile, setUserProfile] = useState(null);
   const [userToken, setUserToken] = useState(null);
   const [accessToken, setAccessToken] = useState("")
+  const [userMedia, setUserMedia] = useState([])
 
   const clientId = "797315068796639";
   const redirectUrl = "https://insta-tracker.onrender.com/";
@@ -47,7 +48,7 @@ function Home() {
     console.log("res in home", response);
   };
 
-  console.log("accessToken", accessToken)
+  // console.log("accessToken", accessToken)
   const igToken = localStorage.getItem("igToken");
   console.log("igToken", igToken)
   const getUserProfileData = () => {
@@ -65,6 +66,7 @@ function Home() {
     axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=${igToken}`)
       .then(response => {
         console.log("media", response.data.data);
+        setUserMedia(response.data)
         // setUserProfile(response.data);
       })
       .catch(error => {
@@ -92,7 +94,7 @@ function Home() {
     <>
       {
         userToken ? (
-          <PostsAndStories userProfile={userProfile} />
+          <PostsAndStories userProfile={userProfile} userMedia={userMedia} />
 
         ) : (
           <>
