@@ -3,13 +3,13 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Posts from '../Posts';
 import { useNavigate } from 'react-router-dom'
-function PostsAndStories({ userProfile, userMedia }) {
+function PostsAndStories({ userProfile, mentioned }) {
   const navigate = useNavigate();
   const [page, setPage] = useState('post')
 
   const handleLogout = () => {
-    localStorage.clear();
-    navigate('/')
+    localStorage.removeItem("accessToken");
+    navigate('/home')
 
   }
   return (
@@ -17,7 +17,7 @@ function PostsAndStories({ userProfile, userMedia }) {
       <Navbar className="" style={{ borderBottom: "solid black 1px" }}>
         <Container fluid>
           <Navbar.Text>
-            <span className='loggedInUser'>Connected: {userProfile?.username}</span>
+            <span className='loggedInUser'>Connected: {userProfile?.short_name}</span>
           </Navbar.Text>          <Navbar.Toggle />
           <div className='menu_links'
             onClick={() => setPage('story')}
@@ -30,15 +30,7 @@ function PostsAndStories({ userProfile, userMedia }) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-
-
-          </div>
-        </div>
-      </div>
-      {page === "post" && <Posts userMedia={userMedia} />}
+      {page === "post" && <Posts mentioned={mentioned} />}
       {/* {page === "story" && <Stories userProfile={userProfile} />} */}
     </>
   )

@@ -61,6 +61,8 @@
 }
 
 .caption {
-  margin-top: 10px;
   font-size: 14px;
+  font-weight: bold;
+  color: black;
+
 }

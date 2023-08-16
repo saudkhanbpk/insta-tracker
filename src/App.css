@@ -46,6 +46,7 @@
   font-weight: 600;
   margin-right: 50px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .menu_link {
@@ -54,4 +55,6 @@
   font-weight: 600;
   margin-right: 40px;
   text-decoration: none;
+  cursor: pointer;
+
 }
