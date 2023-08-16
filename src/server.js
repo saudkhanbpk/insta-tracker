@@ -22,20 +22,20 @@ app.post('/webhook', (req, res) => {
   }
 });
 
-// Handle verification requests
-app.get('/webhook', (req, res) => {
-  const mode = req.query['hub.mode'];
-  const verifyToken = req.query['hub.verify_token'];
-  const challenge = req.query['hub.challenge'];
+// // Handle verification requests
+// app.get('/webhook', (req, res) => {
+//   const mode = req.query['hub.mode'];
+//   const verifyToken = req.query['hub.verify_token'];
+//   const challenge = req.query['hub.challenge'];
 
-  if (mode === 'subscribe' && verifyToken === 'mytoken') {
-    console.log('Verification successful');
-    res.status(200).send(challenge);
-  } else {
-    console.log('Verification failed');
-    res.sendStatus(403);
-  }
-});
+//   if (mode === 'subscribe' && verifyToken === 'mytoken') {
+//     console.log('Verification successful');
+//     res.status(200).send(challenge);
+//   } else {
+//     console.log('Verification failed');
+//     res.sendStatus(403);
+//   }
+// });
 
 // Serve the React app
 app.get('/', (req, res) => {
