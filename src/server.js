@@ -26,8 +26,8 @@ mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
 });
 const webhookSchema = new mongoose.Schema({
-  entry: Array,
-  changes: String, // Modify this according to the actual structure
+  entry: Array
+
 });
 
 const WebhookData = mongoose.model('WebhookData', webhookSchema);
@@ -37,13 +37,11 @@ app.post('/webhook', (req, res) => {
   const body = req.body;
 
   console.log('Received webhook:', body);
-  console.log('Second:', body.changes);
 
   if (body.object === 'page') {
     // Create a new instance of the WebhookData model
     const newWebhookData = new WebhookData({
-      entry: body.entry,
-      changes: body.changes,
+      entry: body,
     });
 
     // Save the data to MongoDB
