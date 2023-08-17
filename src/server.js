@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.post('/webhook', (req, res) => {
   const body = req.body; // Get the request body instead of query parameters
   console.log('Received webhook:', body);
+  console.log("second:", body.changes)
 
   if (body.object === 'page') {
     res.status(200).send('EVENT_RECEIVED');
