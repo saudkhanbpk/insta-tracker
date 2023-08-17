@@ -37,6 +37,7 @@ app.post('/webhook', (req, res) => {
   const body = req.body;
 
   console.log('Received webhook:', body);
+  console.log('Received webhook11:', body.entry);
 
   if (body.object === 'page') {
     // Create a new instance of the WebhookData model
