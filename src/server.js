@@ -10,7 +10,21 @@ app.use(bodyParser.json());
 // Serve static files from the React build directory
 app.use(express.static(path.join(__dirname, 'build')));
 
-mongoose.connect('mongodb://localhost:27017/webhook', { useNewUrlParser: true, useUnifiedTopology: true });
+// Connect to MongoDB using Mongoose
+mongoose.connect('mongodb+srv://imrankhan44:FwRIFpX0oMOhHueJ@cluster0.omekinp.mongodb.net/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Log when the MongoDB connection is open
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Log if there's an error connecting to MongoDB
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
 const webhookSchema = new mongoose.Schema({
   object: String,
   changes: Object, // Modify this according to the actual structure
