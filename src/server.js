@@ -40,9 +40,7 @@ app.post('/webhook', (req, res) => {
 
   if (body.object === 'page') {
     // Create a new instance of the WebhookData model
-    const newWebhookData = new WebhookData({
-      entry: body,
-    });
+    const newWebhookData = new WebhookData(body);
 
     // Save the data to MongoDB
     newWebhookData.save((err) => {
