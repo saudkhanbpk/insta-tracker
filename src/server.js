@@ -31,26 +31,6 @@ const webhookSchema = new mongoose.Schema({
 });
 
 const WebhookData = mongoose.model('WebhookData', webhookSchema);
-
-// Handle incoming webhook requests
-// app.post('/webhook', (req, res) => {
-//   const body = req.body;
-
-//   console.log('Received webhook:', body);
-//   console.log('Received webhook11:', body.entry);
-//   new WebhookData({
-//     entry: body
-//   }).save((err) => {
-//     if (err) {
-//       console.error('Error saving data:', err);
-//       res.status(500).send('Error saving data');
-//     } else {
-//       console.log('Data saved to MongoDB');
-//       res.status(200).send('EVENT_RECEIVED');
-//     }
-//   });
-// });
-
 app.post('/webhook', async (req, res) => {
   const body = req.body;
 
@@ -70,23 +50,6 @@ app.post('/webhook', async (req, res) => {
   }
 });
 
-
-// // Handle verification requests
-// app.get('/webhook', (req, res) => {
-//   const mode = req.query['hub.mode'];
-//   const verifyToken = req.query['hub.verify_token'];
-//   const challenge = req.query['hub.challenge'];
-
-//   if (mode === 'subscribe' && verifyToken === 'mytoken') {
-//     console.log('Verification successful');
-//     res.status(200).send(challenge);
-//   } else {
-//     console.log('Verification failed');
-//     res.sendStatus(403);
-//   }
-// });
-
-// Serve the React app
 app.get('/', (req, res) => {
   res.send('i am doing good');
 });
