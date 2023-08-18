@@ -33,24 +33,42 @@ const webhookSchema = new mongoose.Schema({
 const WebhookData = mongoose.model('WebhookData', webhookSchema);
 
 // Handle incoming webhook requests
-app.post('/webhook', (req, res) => {
+// app.post('/webhook', (req, res) => {
+//   const body = req.body;
+
+//   console.log('Received webhook:', body);
+//   console.log('Received webhook11:', body.entry);
+//   new WebhookData({
+//     entry: body
+//   }).save((err) => {
+//     if (err) {
+//       console.error('Error saving data:', err);
+//       res.status(500).send('Error saving data');
+//     } else {
+//       console.log('Data saved to MongoDB');
+//       res.status(200).send('EVENT_RECEIVED');
+//     }
+//   });
+// });
+
+app.post('/webhook', async (req, res) => {
   const body = req.body;
 
   console.log('Received webhook:', body);
   console.log('Received webhook11:', body.entry);
-  new WebhookData({
-    entry: body
-  }).save((err) => {
-    if (err) {
-      console.error('Error saving data:', err);
-      res.status(500).send('Error saving data');
-    } else {
-      console.log('Data saved to MongoDB');
-      res.status(200).send('EVENT_RECEIVED');
-    }
-  });
-});
 
+  try {
+    await new WebhookData({
+      entry: body
+    }).save();
+
+    console.log('Data saved to MongoDB');
+    res.status(200).send('EVENT_RECEIVED');
+  } catch (err) {
+    console.error('Error saving data:', err);
+    res.status(500).send('Error saving data');
+  }
+});
 
 
 // // Handle verification requests
