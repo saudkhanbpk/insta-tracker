@@ -38,25 +38,19 @@ app.post('/webhook', (req, res) => {
 
   console.log('Received webhook:', body);
   console.log('Received webhook11:', body.entry);
-
-  if (body.object === 'page') {
-    // Create a new instance of the WebhookData model
-    const newWebhookData = new WebhookData(body);
-
-    // Save the data to MongoDB
-    newWebhookData.save((err) => {
-      if (err) {
-        console.error('Error saving data:', err);
-        res.status(500).send('Error saving data');
-      } else {
-        console.log('Data saved to MongoDB');
-        res.status(200).send('EVENT_RECEIVED');
-      }
-    });
-  } else {
-    res.sendStatus(404);
-  }
+  new WebhookData({
+    entry: body
+  }).save((err) => {
+    if (err) {
+      console.error('Error saving data:', err);
+      res.status(500).send('Error saving data');
+    } else {
+      console.log('Data saved to MongoDB');
+      res.status(200).send('EVENT_RECEIVED');
+    }
+  });
 });
+
 
 
 // // Handle verification requests
